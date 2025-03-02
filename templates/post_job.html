@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Post a Job{% endblock %}
+
+{% block content %}
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center">Post a Job</h2>
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            
+            <div class="mb-3">
+                {{ form.title.label(class="form-label") }}
+                {{ form.title(class="form-control") }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.description.label(class="form-label") }}
+                {{ form.description(class="form-control", rows=4) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.skills.label(class="form-label") }}
+                {{ form.skills(class="form-control", placeholder="E.g., Python, SQL, Flask") }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Post Job</button>
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Job Listings{% endblock %}
+
+{% block content %}
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center">Available Jobs</h2>
+
+        <!-- Resume Upload Form -->
+        <form action="/jobs" method="post" enctype="multipart/form-data" class="mb-4">
+            <label for="resume" class="form-label">Upload Your Resume to Check Job Matches:</label>
+            <input type="file" name="resume" class="form-control mb-2" accept=".pdf" required>
+            <button type="submit" class="btn btn-primary">Upload & Check Matches</button>
+        </form>
+
+        {% if jobs %}
+            <ul class="list-group">
+                {% for job in jobs %}
+                    <li class="list-group-item">
+                        <h4>{{ job.title }}</h4>
+                        <p>{{ job.description }}</p>
+                        <strong>Required Skills:</strong> {{ job.skills }}
+
+                        <!-- Match Percentage Bar -->
+                        {% if match_results.get(job.id) is not none %}
+                            <div class="mt-2">
+                                <strong>Match Score: {{ match_results[job.id] }}%</strong>
+                                <div class="progress">
+                                    <div class="progress-bar {% if match_results[job.id] >= 50 %}bg-success{% else %}bg-danger{% endif %}" 
+                                         role="progressbar" 
+                                         style="width: {{ match_results[job.id] }}%;" 
+                                         aria-valuenow="{{ match_results[job.id] }}" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="100">
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+
+                        <br>
+                        <a href="{{ url_for('apply_for_job', job_id=job.id) }}" class="btn btn-success mt-2">Apply Now</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-center text-muted">No jobs posted yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Resume Results{% endblock %}
+
+{% block content %}
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center text-primary">Resume Analysis Results</h2>
+        
+        <p class="text-center"><strong>Match Percentage:</strong> <span class="badge bg-info fs-5">{{ match_percentage }}%</span></p>
+
+        <h3 class="text-center">Matched Skills:</h3>
+        <ul class="list-group list-group-flush">
+            {% for skill in matched_skills %}
+                <li class="list-group-item">{{ skill }}</li>
+            {% endfor %}
+        </ul>
+
+        {% if match_percentage >= 50 %}
+            <p class="text-center text-success fs-4 mt-3"><strong>✅ Qualified for the Job</strong></p>
+        {% else %}
+            <p class="text-center text-danger fs-4 mt-3"><strong>❌ Disqualified</strong></p>
+        {% endif %}
+
+        <div class="text-center mt-3">
+            <a href="/" class="btn btn-primary">Upload Another Resume</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Upload Resume{% endblock %}
+
+{% block content %}
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center">Upload Your Resume</h2>
+        <p class="text-center text-muted">Supported format: <strong>PDF</strong></p>
+
+        <form action="/" method="post" enctype="multipart/form-data" class="text-center">
+            <div class="mb-3">
+                <input type="file" name="file" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload & Analyze</button>
+        </form>
+    </div>
+{% endblock %}

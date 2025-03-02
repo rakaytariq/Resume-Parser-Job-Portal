@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Apply for {{ job.title }}{% endblock %}
+
+{% block content %}
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center">Apply for {{ job.title }}</h2>
+        <p><strong>Job Description:</strong> {{ job.description }}</p>
+        <p><strong>Required Skills:</strong> {{ job.skills }}</p>
+
+        <form method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                {{ form.name.label(class="form-label") }}
+                {{ form.name(class="form-control") }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control") }}
+            </div>
+
+            <div class="mb-3">
+                {{ form.resume.label(class="form-label") }}
+                {{ form.resume(class="form-control") }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Application</button>
+        </form>
+    </div>
+{% endblock %}
